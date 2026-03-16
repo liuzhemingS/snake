@@ -1,3 +1,9 @@
+
+body{
+    display: flex;
+
+}
+
 #box{
     border: 5px solid #000;
 }
@@ -16,4 +22,28 @@
 
 .score{
     font: 75px orbitron;
+}
+
+#controller__div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px 
+}
+
+#up, #izq, #der, #down{
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    background-image: linear-gradient(white, #dadce0);
+
+    border-radius: 7px;
+}
+
+#ksvjkrcabgeivy{
+    height: 45px;
+    width: 135px;
+    display: flex;
+    justify-content: space-between;
 }
