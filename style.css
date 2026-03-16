@@ -1,0 +1,19 @@
+#box{
+    border: 5px solid #000;
+}
+#container{
+    text-align: center;
+    margin-top: 50px;
+}
+
+#resetBtn{
+    width: 75px;
+    height: 35px;
+    border: 1px solid #dadce0;
+    border-radius: 7px;
+    font-family: orbitron, cursive;
+}
+
+.score{
+    font: 75px orbitron;
+}
