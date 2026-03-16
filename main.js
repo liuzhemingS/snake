@@ -21,11 +21,15 @@ let snake = [{x: unidad*4, y: 0},
              {x: unidad, y: 0},
              {x: 0, y: 0},
 ];
-window.addEventListener("keydown", changeDirection);
-empezar();
+
+    const goingUp = (yVelocity == -unidad);
+    const goingDown = (yVelocity == unidad);
+    const goingRight = (xVelocity == unidad);
+    const goingLeft = (xVelocity == -unidad);
+
 function empezar(){
     alive = true; 
-    scoreText.textContent = score;
+    score.textContent = scoreText;
     snake = [{x: unidad*4, y: 0}, 
              {x: unidad*3, y: 0},
              {x: unidad*2, y: 0},
@@ -71,7 +75,7 @@ function tick(){
             drawSnake();
             IsOver();
             tick();
-        }, 45)
+        }, 75)
     } else{
         displayGameOver();
     }
@@ -81,8 +85,8 @@ function moveSnake(){
                   y: snake[0].y + yVelocity};
     snake.unshift(head);
     if(snake[0].x == fX && snake[0].y == fY){
-        score += 1;
-        scoreText.textContent = score;
+        scoreText += 1;
+        score.textContent = scoreText;
         genFood();
     } else{
         snake.pop();
@@ -94,7 +98,6 @@ function changeDirection(event){
     const UP = 87;
     const RIGHT = 68;
     const DOWN = 83;
-
     const goingUp = (yVelocity == -unidad);
     const goingDown = (yVelocity == unidad);
     const goingRight = (xVelocity == unidad);
@@ -119,20 +122,23 @@ function changeDirection(event){
             break;
     }
 };
+
+
+
 function IsOver(){
     switch(true){
-        /*case (snake[0].x < 0):
+        case (snake[0].x < 0):
             alive = false;
-            break;*/
-        /*case (snake[0].x >= boxWidth):
+            break;
+        case (snake[0].x >= boxWidth):
             alive = false;
-            break;*/
-        /*case (snake[0].y < 0):
+            break;
+        case (snake[0].y < 0):
             alive = false;
-            break;*/
-        /*case (snake[0].y >= boxHeight):
+            break;
+        case (snake[0].y >= boxHeight):
                 alive = false;
-                break;*/
+                break;
     }
     for(let i = 1; i < snake.length; i+=1){
         if(snake[i].x == snake[0].x && snake[i].y == snake[0].y){
@@ -141,14 +147,14 @@ function IsOver(){
     }
 };
 function displayGameOver(){
-    box.font = "50px MV Boli";
-    box.fillStyle = "black";
-    box.textAlign = "center";
-    box.fillText("GAME OVER!", boxWidth / 2, boxHeight / 2);
+    e.font = "50px MV Boli";
+    e.fillStyle = "black";
+    e.textAlign = "center";
+    e.fillText("GAME OVER", boxWidth / 2, boxHeight / 2);
     alive = false;
 };
 function resetGame(){
-    score = 0;
+    scoreText = 0;
     xVelocity = unidad;
     yVelocity = 0;
     snake = [
@@ -160,3 +166,40 @@ function resetGame(){
     ];
     empezar();
 };
+
+window.addEventListener("keydown", changeDirection);
+empezar();
+resetBtn.addEventListener('click', resetGame)
+
+let up = document.getElementById('up')
+let izq = document.getElementById('izq')
+let der = document.getElementById('der')
+let down = document.getElementById('down')
+
+up.addEventListener('click', () => {
+    if (yVelocity !== unidad) { // not going down
+        xVelocity = 0;
+        yVelocity = -unidad;
+    }
+});
+
+down.addEventListener('click', () => {
+    if (yVelocity !== -unidad) { // not going up
+        xVelocity = 0;
+        yVelocity = unidad;
+    }
+});
+
+izq.addEventListener('click', () => {
+    if (xVelocity !== unidad) { // not going right
+        xVelocity = -unidad;
+        yVelocity = 0;
+    }
+});
+
+der.addEventListener('click', () => {
+    if (xVelocity !== -unidad) { // not going left
+        xVelocity = unidad;
+        yVelocity = 0;
+    }
+});
